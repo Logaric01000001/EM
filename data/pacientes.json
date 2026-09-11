@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "nombre": "Carlos Mendoza",
+    "cedula": "0928374651",
+    "polizaId": "POL-100"
+  },
+  {
+    "id": "2",
+    "nombre": "Maria Elena Suarez",
+    "cedula": "1719283745",
+    "polizaId": "POL-200"
+  },
+  {
+    "id": "3",
+    "nombre": "Roberto Delgado",
+    "cedula": "0912345678",
+    "polizaId": "POL-300"
+  }
+]

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de Emergencias Hospitalarias</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Barra Superior -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-tag">SISTEMA DE SALUD Y SEGUROS</span>
+        <h1>Control de Ingresos a Emergencias</h1>
+      </div>
+      <div class="server-badge">
+        <span class="dot"></span>
+        <span>Servidor Activo (Puerto 3000)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="main-layout">
+
+    <!-- Formulario de Registro de Ingreso -->
+    <section class="panel-box">
+      <div class="panel-header">
+        <h2>Registro de Ingreso a Urgencias</h2>
+        <p>Seleccione el paciente e ingrese el diagnóstico para validar cobertura</p>
+      </div>
+
+      <form id="form-emergencia" class="form-container">
+        <div class="form-group">
+          <label for="select-paciente">Asegurado:</label>
+          <select id="select-paciente" required>
+            <option value="">Cargando lista de pacientes...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="input-hospital">Hospital o Clínica:</label>
+          <input type="text" id="input-hospital" value="Hospital Metropolitano" required>
+        </div>
+
+        <div class="form-group">
+          <label for="input-diagnostico">Motivo de Ingreso / Diagnóstico:</label>
+          <input type="text" id="input-diagnostico" placeholder="Ejemplo: Diabetes, Asma, Apendicitis..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="input-webhooksite">URL de Webhook.site (Opcional):</label>
+          <input type="url" id="input-webhooksite" placeholder="https://webhook.site/tu-codigo-aqui">
+          <span class="form-help">Pega tu URL de webhook.site para recibir la alerta en vivo en tu panel externo.</span>
+        </div>
+
+        <button type="submit" class="btn-submit">Procesar e Enviar Notificaciones</button>
+      </form>
+    </section>
+
+    <!-- Notificaciones Generadas -->
+    <section class="panel-box">
+      <div class="panel-header">
+        <h2>Notificaciones Emitidas</h2>
+        <p>Despacho en tiempo real para el hospital y la aseguradora</p>
+      </div>
+
+      <div id="webhook-site-status" class="webhook-status-bar hidden">
+        <span>Notificación reenviada con éxito a Webhook.site</span>
+      </div>
+
+      <div class="notif-cards-grid">
+        
+        <!-- Notificacion Hospital -->
+        <div class="notif-card">
+          <div class="notif-card-header">
+            <h3>Admisiones del Hospital</h3>
+            <span class="tag-channel">Canal Hospital</span>
+          </div>
+          <div id="content-hospital" class="notif-content">
+            <p class="empty-msg">Complete el formulario para generar la notificación.</p>
+          </div>
+        </div>
+
+        <!-- Notificacion Seguro -->
+        <div class="notif-card">
+          <div class="notif-card-header">
+            <h3>Gestor de Casos (Aseguradora)</h3>
+            <span class="tag-channel">Canal Seguro</span>
+          </div>
+          <div id="content-seguro" class="notif-content">
+            <p class="empty-msg">Complete el formulario para generar la notificación.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Sistema de Control de Emergencias - Reto 4</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

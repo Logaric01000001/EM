@@ -1,0 +1,22 @@
+{
+  "name": "alerta-emergencias-seguro",
+  "version": "1.0.0",
+  "description": "Sistema de Alerta Temprana de Ingresos a Emergencias y Notificacion Dual",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "webhook",
+    "emergencias",
+    "seguros",
+    "hospital",
+    "hackiathon"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

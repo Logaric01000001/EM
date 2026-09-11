@@ -1,0 +1,23 @@
+[
+  {
+    "numeroPoliza": "POL-100",
+    "estado": "Vigente",
+    "plan": "Plan Premium",
+    "preexistencias": ["Diabetes", "Hipertension"],
+    "copago": 10
+  },
+  {
+    "numeroPoliza": "POL-200",
+    "estado": "Vigente",
+    "plan": "Plan Familiar",
+    "preexistencias": ["Asma"],
+    "copago": 15
+  },
+  {
+    "numeroPoliza": "POL-300",
+    "estado": "Inactiva",
+    "plan": "Plan Basico",
+    "preexistencias": ["Insuficiencia Renal"],
+    "copago": 20
+  }
+]
