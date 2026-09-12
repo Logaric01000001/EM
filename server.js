@@ -139,3 +139,6 @@ app.post('/api/webhook/emergencia', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor iniciado en http://localhost:${PORT}`);
 });
+
+module.exports = app;
+
