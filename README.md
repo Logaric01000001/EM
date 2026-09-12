@@ -38,16 +38,3 @@ Este sistema permite auditar en tiempo real la llegada de un paciente a la sala 
    ```
    http://localhost:3000
    ```
-
----
-
-## Pasos para Subir a GitHub
-
-```bash
-git init
-git add .
-git commit -m "Solucion Reto 4 - Sistema de Emergencias Hospitalarias"
-git remote add origin https://github.com/TU_USUARIO/reto4-emergencias-seguro.git
-git branch -M main
-git push -u origin main
-```
