@@ -1,18 +1,27 @@
 const express = require('express');
 const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Ruta principal explícita para asegurar que Vercel sirva index.html en /
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // Leer archivos JSON de la carpeta data
 function cargarDatos(nombreArchivo) {
   try {
-    const raw = fs.readFileSync('./data/' + nombreArchivo, 'utf-8');
+    const ruta = path.join(__dirname, 'data', nombreArchivo);
+    if (!fs.existsSync(ruta)) return [];
+    const raw = fs.readFileSync(ruta, 'utf-8');
     return JSON.parse(raw);
   } catch (err) {
+    console.error('Error leyendo JSON:', err.message);
     return [];
   }
 }
@@ -41,7 +50,6 @@ app.post('/api/webhook/emergencia', async (req, res) => {
   const pacientes = cargarDatos('pacientes.json');
   const polizas = cargarDatos('polizas.json');
 
-  // Buscar paciente y poliza
   const paciente = pacientes.find(p => p.id === pacienteId);
   if (!paciente) {
     return res.status(404).json({ error: 'Paciente no encontrado.' });
@@ -49,7 +57,6 @@ app.post('/api/webhook/emergencia', async (req, res) => {
 
   const poliza = polizas.find(p => p.numeroPoliza === paciente.polizaId);
 
-  // Analizar estado de cobertura y preexistencias
   let estado = 'APROBADO';
   let mensaje = 'Póliza vigente. Cobertura autorizada directamente.';
   let preexistenciaEncontrada = 'Ninguna';
@@ -69,7 +76,6 @@ app.post('/api/webhook/emergencia', async (req, res) => {
     }
   }
 
-  // Estructura de notificaciones
   const notificacionHospital = {
     tipoNotificacion: 'Admision Hospitalaria',
     hospital: hospital || 'Hospital Metropolitano',
@@ -100,7 +106,6 @@ app.post('/api/webhook/emergencia', async (req, res) => {
       : 'Suspender carta de garantía.'
   };
 
-  // Reenviar a webhook.site si se proporciono la URL
   let enviadoAWebhookSite = false;
   if (webhookSiteUrl && webhookSiteUrl.startsWith('http')) {
     try {
@@ -141,4 +146,3 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
-
